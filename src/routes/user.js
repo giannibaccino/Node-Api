@@ -14,14 +14,14 @@ router.post('/add', (req, res) => {
 });
 
 //List all users
-router.get('/', (req, res) => {
+router.get('/users', (req, res) => {
     userSchema.find()
     .then(() => console.log('Usuarios listados'))
     .catch((e) => res.json({ message: e }));
 });
 
 //List user by Id
-router.get('/:id', (req, res) => {
+router.get('/user/:id', (req, res) => {
     const { id } = req.params;
 
     userSchema.findById(id)
