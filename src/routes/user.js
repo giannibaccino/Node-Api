@@ -1,5 +1,4 @@
 const express = require('express');
-const user = require('../models/user');
 const userSchema = require('../models/user');
 
 const router = express.Router();
@@ -9,14 +8,14 @@ router.post('/add', (req, res) => {
     const newUser = userSchema(req.body);
 
     newUser.save()
-    .then(() => console.log('Usuario guardado con exito'))
+    .then((data) => res.json(data))
     .catch((e) => res.json({ message: e }));
 });
 
 //List all users
 router.get('/users', (req, res) => {
     userSchema.find()
-    .then(() => console.log('Usuarios listados'))
+    .then((data) => res.json(data))
     .catch((e) => res.json({ message: e }));
 });
 
@@ -25,7 +24,7 @@ router.get('/user/:id', (req, res) => {
     const { id } = req.params;
 
     userSchema.findById(id)
-    .then(() => console.log('Usuario listado'))
+    .then((data) => res.json(data))
     .catch((e) => res.json({ message: e }));
 });
 
@@ -35,7 +34,7 @@ router.put('/modify/:id', (req, res) => {
     const { ci, fullName, age} = req.body;
 
     userSchema.updateOne({_id: id}, {$set: {ci, fullName, age}})
-    .then(() => console.log('Usuario modificado'))
+    .then((data) => res.json(data))
     .catch((e) => res.json({ message: e }));
 });
 
@@ -44,7 +43,7 @@ router.delete('/kill/:id', (req, res) => {
     const { id } = req.params;
 
     userSchema.deleteOne({_id: id})
-    .then(() => console.log('Usuario eliminado'))
+    .then((data) => res.json(data))
     .catch((e) => res.json({ message: e }));
 });
 
