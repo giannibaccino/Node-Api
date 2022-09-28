@@ -18,7 +18,7 @@ app.set('view engine', '.hbs');
 
 //Routing
 app.get('/', (req,res) => {
-    res.redirect('https://node-api-6mtr.vercel.app/crear');
+    res.render('listado');
   });
 app.get('/crear', (req, res) => {
     res.render('crear');
