@@ -17,8 +17,8 @@ app.engine('.hbs', hbs.engine({
 app.set('view engine', '.hbs');
 
 //Routing
-app.get('/',(req,res) => {
-    res.redirect('http://localhost:4200/crear');
+app.get('/', (req,res) => {
+    res.redirect('https://node-api-6mtr.vercel.app/crear');
   });
 app.get('/crear', (req, res) => {
     res.render('crear');
