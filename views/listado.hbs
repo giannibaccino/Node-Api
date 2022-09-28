@@ -1,0 +1,94 @@
+<script type="text/javascript">
+    let table = document.createElement('table');
+    let header = document.createElement('thead');
+    let ths = document.createElement('tr');
+    let thn1 = document.createTextNode("Nombre");
+    let th1 = document.createElement('th');
+    th1.appendChild(thn1);
+    let thn2 = document.createTextNode("C.I");
+    let th2 = document.createElement('th');
+    th2.appendChild(thn2);
+    let thn3 = document.createTextNode("Edad");
+    let th3 = document.createElement('th');
+    th3.appendChild(thn3);
+    ths.appendChild(th1);
+    ths.appendChild(th2);
+    ths.appendChild(th3);
+    header.appendChild(ths);
+    table.appendChild(header);
+
+    fetch('/api/users', {
+        method: 'GET',
+        headers: {"Content-type": "application/json; charset=utf-8"}
+    })
+    .then(res => res.json())
+    .then(data => {
+        data.map(user => {
+            let users = document.createElement('tr');
+            let name = document.createTextNode(user.fullName);
+            let nombre = document.createElement('td');
+            nombre.appendChild(name);
+            let ci = document.createTextNode(user.ci);
+            let cedula = document.createElement('td');
+            cedula.appendChild(ci);
+            let age = document.createTextNode(user.age);
+            let edad = document.createElement('td');
+            edad.appendChild(age);
+            users.appendChild(nombre);
+            users.appendChild(cedula);
+            users.appendChild(edad);
+            table.appendChild(users);
+        });
+        
+        let add = document.createTextNode("Agregar usuario");
+        let bt = document.createElement('button');
+        bt.appendChild(add);
+        bt.addEventListener("click", () => {window.location.assign("http://localhost:4200/crear")})
+
+        document.body.appendChild(table);
+        document.body.appendChild(bt);
+    });
+</script>
+
+<style>
+    body{
+        background-color: cornflowerblue;
+        text-align: center;
+        }
+    thead{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        text-decoration: underline;
+        color: chocolate;
+    }
+    table{
+        margin: auto;
+        text-align: left;
+        background-color: aliceblue;
+        border: 5px black solid;
+        border-radius: 10px;
+        box-shadow: 10px 10px;
+        margin-bottom: 50px;
+    }
+    td{
+        padding-right: 50px;
+        padding-bottom: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        font-style: oblique;
+    }
+    button{
+        background-color: chocolate;
+        color: white;
+        border: 2px black solid;
+        border-radius: 6px;
+        box-shadow: 5px 5px black;
+        width: 200px;
+        height: 100px;
+        font-size: x-large;
+    }
+    button:hover{
+        cursor: pointer;
+        background-color: aquamarine;
+        color: black;
+    }
+</style>

@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const userRoutes = require('./routes/user')
+const hbs = require('express-handlebars');
 
 const app = express();
 const port = process.env.PORT || 4200;
@@ -9,11 +10,22 @@ const port = process.env.PORT || 4200;
 //Middleware
 app.use(express.json());
 app.use('/api', userRoutes);
+app.engine('.hbs', hbs.engine({
+    defaultLayout: 'default',
+    extname: '.hbs'
+}));
+app.set('view engine', '.hbs');
 
 //Routing
-app.get('/', (req, res) => {
-    res.send("Api de usuarios");
-})
+app.get('/crear', (req, res) => {
+    res.render('crear');
+});
+app.get('/lista', (req, res) => {
+    res.render('listado');
+});
+app.get('/user', (req, res) => {
+    res.render('ver-uno');
+});
 
 //Connection with MongoDB
 mongoose

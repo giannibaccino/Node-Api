@@ -1,0 +1,62 @@
+<form id="userData" method="post">
+    <input id="ci" type="text" name="ci" placeholder="C.I" required>
+    <br><br>
+    <input id="fullName" type="text" name="fullName" placeholder="Nombre completo" required>
+    <br><br>
+    <input id="age" type="number" name="age" placeholder="Edad" required>
+    <br><br>
+    <input class="bt" type="submit" value="Crear" >
+</form>
+
+<script type="text/javascript">
+    const userForm = document.querySelector('#userData');
+
+    userForm.addEventListener('submit', event => {
+        event.preventDefault();
+        fetch('/api/add', {
+            method: 'POST',
+            headers: {"Content-type": "application/json; charset=utf-8"},
+            body: JSON.stringify({
+                ci: userForm.querySelector('#ci').value,
+                fullName: userForm.querySelector('#fullName').value,
+                age: userForm.querySelector('#age').value
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            window.location.assign("http://localhost:4200/lista");
+        });
+    })
+</script>
+
+<style>
+    body{
+        background-color: cornflowerblue;
+        text-align: center;
+        }
+    input{
+        background-color: whitesmoke;
+        border: 2px black solid;
+        border-radius: 6px;
+        box-shadow: 5px 5px black;
+        width: 220px;
+        height: 20px;
+    }
+    input:focus{
+        background-color: aquamarine;
+    }
+    .bt{
+        background-color: chocolate;
+        height: 40px;
+        color: white;
+        font-weight: bold;
+        font-size: x-large;
+    }
+    .bt:hover{
+        cursor: pointer;
+        background-color: aquamarine;
+        color: black;
+        font-weight: bold;
+    }
+</style>
